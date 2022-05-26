@@ -91,21 +91,4 @@ $sudo chmod 700 known_hosts
 14. Click on Save.
 15. Click on the new node (slave1) and select “log”.
 16. “Agent successfully connected and online” is displayed in the logs.
-   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  

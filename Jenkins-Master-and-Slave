@@ -1,6 +1,8 @@
 #I am installing Jenkins Master and Slave in 2 AWS VMs using Amazon Linux 2 as AMI.
 
-#Steps to install Jenkins on MasterNode
+##################################################
+##### Steps to install Jenkins on MasterNode #####
+##################################################
 
 #Install some packages
 $sudo yum install wget
@@ -28,6 +30,45 @@ $sudo systemctl enable jenkins --now
 
 #Get the Administrator password stored in file located "/var/lib/jenkins/secrets/initialAdminPassword" and paste it in Jenkins UI
 $sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+
+###############################
+##### Steps to Setup keys #####
+###############################
+
+
+### In SlaveNode ###
+
+$sudo useradd slave
+$sudo su - slave
+$ssh-keygen -t rsa -N "" -f /home/slave/.ssh/id_rsa
+$cd .ssh
+$cat id_rsa.pub > authorized_keys
+$chmod 700 authorized_keys
+
+
+### In MasterNode ###
+
+$sudo mkdir -p /var/lib/jenkins/.ssh
+$cd /var/lib/jenkins/
+$sudo chmod 777 .ssh
+$cd .ssh
+$sudo ssh-keyscan -H <SLAVE_NODE_PRIVATE_IP> >>/var/lib/jenkins/.ssh/known_hosts
+$sudo chown jenkins:jenkins known_hosts
+$sudo chmod 700 known_hosts
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

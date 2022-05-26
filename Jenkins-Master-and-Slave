@@ -12,4 +12,23 @@ $sudo yum update -y
 $sudo yum install java-1.8.0
 
 #Adding Jenkins repo
-$sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo`
+$sudo wget -O /etc/yum.repos.d/jenkins.repo  http://pkg.jenkins-ci.org/redhat/jenkins.repo
+
+#Import the Key file
+$sudo rpm --import https://pkg.jenkins.io/redhat/jenkins.io.key
+
+#Install Jenkins
+$sudo yum install jenkins -y
+
+#Start and Enable the jenkins Service
+$sudo systemctl enable jenkins --now
+
+#As now Jenkins is installed, in VM's security group open port number 8080 and open the public URL of your MasterNode and with port 8080
+# <public-ip>:8080
+
+#Get the Administrator password stored in file located "/var/lib/jenkins/secrets/initialAdminPassword" and paste it in Jenkins UI
+$sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+
+
+

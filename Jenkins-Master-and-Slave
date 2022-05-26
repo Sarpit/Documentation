@@ -39,6 +39,7 @@ $sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 
 ### In SlaveNode ###
 
+$sudo yum install java-1.8.0
 $sudo useradd slave
 $sudo su - slave
 $ssh-keygen -t rsa -N "" -f /home/slave/.ssh/id_rsa
@@ -56,6 +57,38 @@ $cd .ssh
 $sudo ssh-keyscan -H <SLAVE_NODE_PRIVATE_IP> >>/var/lib/jenkins/.ssh/known_hosts
 $sudo chown jenkins:jenkins known_hosts
 $sudo chmod 700 known_hosts
+
+
+#########################################
+##### Configure New Node in jenkins #####
+#########################################
+
+1. Click on Manage Jenkins
+2. Click on Manage Nodes and Clouds
+3. Click on New Node
+4. Enter Node name and select Permanent Agent. Click Create
+5. Enter node configuration details as shown below.
+
+   Name: Slave1
+   Number of executors: 10
+   Remote root directory: /home/slave
+   Usage: Use this node as much as possible
+   Launch method: Launch agent via SSH
+   
+6. In Credentials, Click Add -> Jenkins
+7. In Add Credentials, choose kind as “SSH Username with private key”
+8. In Username field, enter the same username which we created on Slave Node – slave
+9. In Private Key, choose Enter directly
+10. Go to Slave server and copy the private key.
+    
+    $sudo su - slave
+    $cd .ssh
+    $more 
+
+11. Paste the key in the Private key field in Jenkins.
+12. Click on Add.
+13. In the Node Configuration page choose the new credential.
+   
 
 
 

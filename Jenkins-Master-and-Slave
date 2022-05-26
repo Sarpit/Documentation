@@ -88,6 +88,9 @@ $sudo chmod 700 known_hosts
 11. Paste the key in the Private key field in Jenkins.
 12. Click on Add.
 13. In the Node Configuration page choose the new credential.
+14. Click on Save.
+15. Click on the new node (slave1) and select “log”.
+16. “Agent successfully connected and online” is displayed in the logs.
    
 
 

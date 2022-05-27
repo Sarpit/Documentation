@@ -11,12 +11,24 @@ $node -v
 $mkdir ReactApp
 $cd ReactApp
 
+
+
+#########################
+### Creating ReactApp ###
+#########################
+
 #Create new React Project
 $npx create-react-app dockerized-react
 $cd dockerized-react
 $npm start
 
 #Go to Web Browser and open url 'http://<ip>:3000'
+
+
+
+###############################
+### Dockerizing ReactJS App ###
+###############################
 
 #Create a Docker file
 --------------------------------

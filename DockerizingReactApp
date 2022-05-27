@@ -7,4 +7,36 @@ $curl -sL https://rpm.nodesource.com/setup_14.x | sudo -E bash -
 $sudo yum install -y nodejs 
 $node -v
 
+#Create a new Directory
+$mkdir ReactApp
+$cd ReactApp
+
+#Create new React Project
+$npx create-react-app dockerized-react
+$cd dockerized-react
+$npm start
+
+#Go to Web Browser and open url 'http://<ip>:3000'
+
+#Create a Docker file
+--------------------------------
+FROM node:current-alpine
+WORKDIR /app
+COPY package.json .
+RUN npm install
+COPY . .
+CMD ["npm", "run", "start"]
+--------------------------------
+
+#Building docker image
+$docker build -t reactapp .
+
+#Creating a container with the image
+$docker run -it -p 3000:3000 reactapp
+
+#Now go to Web Browser and open url 'http://<ip>:3000'
+
+
+
+
 

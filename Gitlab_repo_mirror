@@ -1,0 +1,25 @@
+#Enable cloud source repositories API 
+$gcloud services enable sourcerepo.googleapis.com
+
+#Create a Gitlab repository that you want to mirror in cloud source repository
+
+#Create a git repo in cloud source repository
+$gcloud source repos create gitlab-csr-mirror
+
+#Get password
+$grep 'source.developers.google.com' ~/.gitcookies | tail -1 | cut -d= -f2
+
+#Get url 
+$CSR_REPO=$(gcloud source repos describe gitlab-csr-mirror --format="value(url)")
+
+#Get username
+$CSR_USER=$(grep 'source.developers.google.com' ~/.gitcookies | \
+    tail -1 | cut -d$'\t' -f7 | cut -d= -f1)
+    
+#Get url includng username
+$echo $CSR_REPO | sed "s/:\/\//:\/\/${CSR_USER}@/"
+
+
+
+
+

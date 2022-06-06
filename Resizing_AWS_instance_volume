@@ -1,0 +1,26 @@
+#Attach the volume
+
+#Create a partition
+
+#Switching to root user
+$sudo -i
+
+#Creating a partition using fdisk uitility
+$fdisk /dev/xvdf
+
+#Formating the newly create disk
+$mkfs.xfs /dev/xvdf1
+
+#Mounting the disk
+$mkdir /mnt/disk1
+$mount /dev/xvdf1 /mnt/disk1/
+$df -Th
+
+#Increase the volume attached to AWS instance 
+
+#Increase the volume inside AWS instance
+$growpart /dev/xvdf 1
+$xfs_growfs /mnt/disk1/
+
+#Checking size
+$df -Th

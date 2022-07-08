@@ -18,9 +18,36 @@ $sudo chmod -R 775 /var/www/html/wordpress
 $sudo apt install mariadb-server
 $sudo systemctl enable mariadb --now
 $sudo mysql_secure_installation
+$sudo mysql -u root -p
+MariaDB [(none)]> CREATE DATABASE redhat;
+MariaDB [(none)]> GRANT ALL PRIVILEGES ON redhat.* TO 'redhat'@'localhost' IDENTIFIED BY 'redhat';
+MariaDB [(none)]> FLUSH PRIVILEGES;
+MariaDB [(none)]> EXIT
 
 
+#
+$cd /var/www/html/wordpress
+$sudo mv wp-config-sample.php wp-config.php
+$sudo vim wp-config.php
+---------------------------------
+ADD DATABASE, USER, PASSWORD
+---------------------------------
 
+#Apache VirtualHost for WordPress
+$sudo vim /etc/apache2/sites-available/wordpress.conf
+------------------------------------------------------
+<VirtualHost *:80>
+	ServerName wordpress
+	ServerAdmin wordpress@localhost
+	DocumentRoot /var/www/html/wordpress
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+------------------------------------------------------
 
+$apache2ctl -t
+$sudo a2ensite wordpress.conf
+$sudo systemctl reload apache2
 
-
+$sudo a2dissite 000-default.conf
+$sudo systemctl reload apache2

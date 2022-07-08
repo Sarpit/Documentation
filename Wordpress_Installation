@@ -1,0 +1,26 @@
+#
+$sudo apt update
+$sudo apt install libapache2-mod-php php7.4 php7.4-{cli,curl,gd,mbstring,xml,xmlrpc,soap,intl,zip,mysql}
+
+#
+$sudo apt-get update
+$sudo apt-get install apache2
+$sudo systemctl enable apache2 --now
+
+#
+$wget -c http://wordpress.org/latest.tar.gz
+$tar -xzvf latest.tar.gz
+$sudo cp -R wordpress /var/www/html/
+$sudo chown -R www-data:www-data /var/www/html/wordpress
+$sudo chmod -R 775 /var/www/html/wordpress
+
+#
+$sudo apt install mariadb-server
+$sudo systemctl enable mariadb --now
+$sudo mysql_secure_installation
+
+
+
+
+
+

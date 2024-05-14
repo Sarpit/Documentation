@@ -1,0 +1,3 @@
+mysqldump -u [user] -h [host] -p [DB] --set-gtid-purged=OFF > [file].sql
+
+mysql -u [user] -h [host] -p <NEW-DB> < [file].sql
